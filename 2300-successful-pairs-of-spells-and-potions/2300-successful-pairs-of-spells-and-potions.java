@@ -17,8 +17,8 @@ class Solution {
     }
     
     public int findIndex(int spell, int[] potions, long success){
-        int lo = 0, hi = potions.length;
-        while(lo+1 < hi){
+        int lo = -1, hi = potions.length;
+        while(lo + 1 < hi){
             int mid = lo + (hi-lo)/2;
             if((long)potions[mid]*spell >= success){
                 hi = mid;
@@ -27,6 +27,8 @@ class Solution {
             }
         }
         
-        return (long)potions[lo]*spell>= success ? lo : hi;
+        //System.out.println("hi "+ hi+" lo "+lo);
+        //return (long)potions[lo]*spell>= success ? lo : hi;
+        return  hi;
     }
 }
