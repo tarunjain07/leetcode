@@ -21,6 +21,7 @@ class Solution {
                 if (grid[i][j] == 0) {
                     ans++;
                     dfs(i, j, n, m, grid);
+                    
                 }
 
             }
