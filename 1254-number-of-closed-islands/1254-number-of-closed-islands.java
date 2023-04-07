@@ -9,6 +9,7 @@ class Solution {
                 if (i * j == 0 || i == n - 1 || j == m - 1) {
                     if (grid[i][j] == 0) {
                         dfs(i, j, n, m, grid);
+                        
                     }
                 }
             }
