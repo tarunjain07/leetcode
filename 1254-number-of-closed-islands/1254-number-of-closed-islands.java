@@ -21,10 +21,8 @@ class Solution {
             for (int j = 0; j < m; j++) {
                 if (grid[i][j] == 0) {
                     ans++;
-                    dfs(i, j, n, m, grid);
-                    
+                    dfs(i, j, n, m, grid);   
                 }
-
             }
         }
 
