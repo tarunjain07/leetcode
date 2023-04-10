@@ -1,18 +1,19 @@
 class Solution {
+    
+    public boolean isValid_approach1(String s) {
+        return false;
+    }
+    //approach - 1
     public boolean isValid(String s) {
         
         Stack<Character> stack = new Stack<>();
         
         for(char c: s.toCharArray()){
-            if(c == '(' || c == '[' || c == '{'){
+            if(stack.isEmpty() || c == '(' || c == '[' || c == '{'){
                 stack.push(c);
                 continue;
             }
             
-            if(stack.isEmpty()){
-                return false;
-            }
-
             char popChar = stack.pop();
 
             if(c == ')'){
