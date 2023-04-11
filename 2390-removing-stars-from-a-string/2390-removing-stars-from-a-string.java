@@ -3,7 +3,7 @@ class Solution {
         Stack<Character> stack = new Stack<>();
         for(char c : s.toCharArray()){
             if(c == '*'){
-                stack.pop();
+                stack.pop(); //no need of stack.isEmpty() check as * will always appear after a char
             }else{
                 stack.push(c);   
             }
