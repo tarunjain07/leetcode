@@ -1,4 +1,12 @@
 class Solution {
+    
+    //Testcases
+    //  "/home/"
+    //  "/home//foo/"
+    //  "/../"
+    //  "/home/../foo/"
+    //  "/home/../..//../foo/"
+    //  "/a/./b/../../c/"
     public String simplifyPath(String path) {
         String[] splittedPaths = path.split("/");
         
