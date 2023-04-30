@@ -1,5 +1,6 @@
 class Solution {
 
+
     //DFS Approach - Start
     public int numSimilarGroups(String[] strs) {
         int nodes = strs.length;
@@ -117,6 +118,7 @@ class Solution {
     
     
     //common code
+    //Asumption - All words in strs have the same length and are anagrams of each other.
     boolean isSimilar(String s, String t){
         int diff = 0;
         if(s.length() != t.length())
@@ -128,6 +130,7 @@ class Solution {
                 diff++;
             }
         }
+        //no ned to check characters - due to above assumptions
         return (diff == 0 || diff == 2);
     }
 
