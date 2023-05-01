@@ -59,7 +59,7 @@ class Solution {
                 values.add(find(val));
             }
             
-            System.out.println(values);
+            //System.out.println(values);
             return values.size();
         }
     }
