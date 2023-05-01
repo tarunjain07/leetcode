@@ -1,12 +1,16 @@
 class Solution {
+    
+    ///DSU Approach - Start
     public int findCircleNum(int[][] isConnected) {
-        UnionFind uf = new UnionFind(isConnected[0].length);
-        
-        for(int j = 0; j < isConnected.length; j++){
-            for(int i = 0; i < isConnected[j].length; i++){
+        int n = isConnected.length;
+        UnionFind uf = new UnionFind(n);
+        //int numberOfComponents = n;
+
+        for(int j = 0; j < n ; j++){
+            for(int i = j+1; i < n ; i++){
                 if(isConnected[j][j] == 1 && isConnected[j][i] == 1 && i != j){
                     uf.union(i, j);
-
+                    //numberOfComponents--;
                 }
             }
         }
@@ -63,4 +67,7 @@ class Solution {
             return values.size();
         }
     }
+    
+    ///DSU Approach - End 
+    
 }
