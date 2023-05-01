@@ -1,4 +1,5 @@
 class Solution {
+    //Tree is a graph which doesn't have a cycle and all nodes are connected
     public boolean validTree(int n, int[][] edges) {
         UnionFind uf = new UnionFind(n);
         int numOfComponent = n;
