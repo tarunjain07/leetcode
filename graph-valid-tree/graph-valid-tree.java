@@ -2,17 +2,15 @@ class Solution {
     //Tree is a graph which doesn't have a cycle and all nodes are connected
     public boolean validTree(int n, int[][] edges) {
         UnionFind uf = new UnionFind(n);
-        int numOfComponent = n;
         for(int[] edge: edges){
             if(uf.find(edge[0]) == uf.find(edge[1]))
                 return false;
             uf.union(edge[0], edge[1]);
-            numOfComponent--;
         }
         
         
         
-        return numOfComponent>1?false:true;
+        return uf.getCount()>1?false:true;
     }
     
     class UnionFind {
