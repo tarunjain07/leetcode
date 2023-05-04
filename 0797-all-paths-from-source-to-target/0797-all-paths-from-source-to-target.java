@@ -1,4 +1,6 @@
 class Solution {
+    
+    //Since constraint is that there will be no cycle so we don't need a visited array
     public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
          int n = graph.length;
         int source = 0;
