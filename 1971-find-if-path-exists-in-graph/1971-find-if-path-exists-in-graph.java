@@ -1,5 +1,16 @@
 class Solution {
+    
     public boolean validPath(int n, int[][] edges, int source, int destination) {
+        UnionFind_UnionByRank_PathCompression uf = new UnionFind_UnionByRank_PathCompression(n);
+        
+        for(int[] edge: edges){
+            uf.union(edge[0], edge[1]);    
+        }
+        
+        return uf.find(source) == uf.find(destination);
+    }
+    
+    public boolean validPath_dfs(int n, int[][] edges, int source, int destination) {
 
         Map<Integer, List<Integer>> paths = new HashMap<>();
         for(int[] edge: edges){
@@ -36,5 +47,64 @@ class Solution {
         }
 
         return false;
+    }
+    
+    
+    //Union Find with path compression and union by rank
+     class UnionFind_UnionByRank_PathCompression {
+
+        private int[] parent;
+        // Use a rank array to record the height of each vertex, i.e., the "rank" of each vertex.
+        private int[] rank;
+
+        public UnionFind_UnionByRank_PathCompression(int size) {
+            parent = new int[size];
+            rank = new int[size];
+            for (int i = 0; i < size; i++) {
+                parent[i] = i;
+                rank[i] = 1; // The initial "rank" of each vertex is 1, because each of them is
+                // a standalone vertex with no connection to other vertices.
+            }
+        }
+
+        // The find function here is the same as that in the disjoint set with path compression.
+        public int find(int x) {
+            if (x == parent[x]) {
+                return x;
+            }
+            return parent[x] = find(parent[x]);
+        }
+
+        // The union function with union by rank
+        public void union(int x, int y) {
+            int rootX = find(x);
+            int rootY = find(y);
+            if (rootX != rootY) {
+                if (rank[rootX] > rank[rootY]) {
+                    parent[rootY] = rootX;
+                } else if (rank[rootX] < rank[rootY]) {
+                    parent[rootX] = rootY;
+                } else {
+                    parent[rootY] = rootX;
+                    rank[rootX] += 1;
+                }
+            }
+        }
+
+
+        public boolean connected(int x, int y) {
+            return find(x) == find(y);
+        }
+
+        public int size(){
+            Set<Integer> values = new HashSet<>();
+            for(int val: parent){
+                values.add(find(val));
+            }
+
+            //System.out.println(values);
+            return values.size();
+        }
+
     }
 }
