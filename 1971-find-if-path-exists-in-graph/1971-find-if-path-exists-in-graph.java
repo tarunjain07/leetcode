@@ -1,6 +1,42 @@
 class Solution {
     
+    //BFS
     public boolean validPath(int n, int[][] edges, int source, int destination) {
+        
+        Map<Integer, List<Integer>> paths = new HashMap<>();
+        for(int[] edge: edges){
+            paths.computeIfAbsent(edge[0], k-> new ArrayList<>()).add(edge[1]);
+            paths.computeIfAbsent(edge[1], k -> new ArrayList<>()).add(edge[0]);
+
+        }
+        
+        boolean[] seen  = new boolean[n];
+        
+        Queue<Integer> queue = new LinkedList<>();
+        queue.offer(source);
+        seen[source] = true;
+        
+        while(!queue.isEmpty()){
+            int polledElement = queue.poll();
+
+            if(polledElement == destination) return true;
+                        
+            for(int next: paths.get(polledElement)){
+                if(!seen[next]){
+                    seen[next] = true;
+
+                    queue.offer(next);
+                }
+            }
+        }
+        
+        return false;
+        
+    }
+    //BFS end 
+    
+    // Union Find - start
+    public boolean validPath_unionFind(int n, int[][] edges, int source, int destination) {
         UnionFind_UnionByRank_PathCompression uf = new UnionFind_UnionByRank_PathCompression(n);
         
         for(int[] edge: edges){
@@ -9,6 +45,8 @@ class Solution {
         
         return uf.find(source) == uf.find(destination);
     }
+    // Union Find - end
+
     
     public boolean validPath_dfs(int n, int[][] edges, int source, int destination) {
 
