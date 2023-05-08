@@ -18,14 +18,15 @@ class Solution {
         
         while(!queue.isEmpty()){
             int polledElement = queue.poll();
-            //seen[polledElement] = true; //this condition here will allow same element to be added in 
-                                          //queue multiple times
+            //seen[polledElement] = true; //this condition here will "allow" same element to be added in 
+                                          //queue multiple times - bad performance
 
             if(polledElement == destination) return true;
                         
             for(int next: paths.get(polledElement)){
                 if(!seen[next]){
-                    seen[next] = true; //this condition here will avoid same element to be added in queue 
+                    seen[next] = true; //this condition here will "avoid" same element to be added in queue 
+                                        // good performance
 
                     queue.offer(next);
                 }
