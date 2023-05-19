@@ -3,16 +3,63 @@ class Solution {
     //odd  length cycle  is not bipartite
     //even length cylce  is     bipartite
     
-    //DFS
-    public boolean isBipartite(int[][] graph) {
+    //BFS - start
+    boolean isBipartiteBfs(Map<Integer, int[]> adj, int currNode, int[] colors, int currColor){
+        colors[currNode] = currColor;
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(currNode);
+        
+        while(!queue.isEmpty()){
+            int ele = queue.poll();
+                    
+            int[] neighbours = adj.get(ele);
+            for(int node: neighbours){
+                if(colors[node] == colors[ele]){
+                    return false;
+                }
+                
+                if(colors[node] == -1){
+                    queue.add(node);
+                    colors[node] = 1-colors[ele];
+                }
+            }
+            
+        }
+        
+        return true;
+    }
+    public boolean isBipartite(int[][] graph){
         int n = graph.length;
         
         int[] colors = new int[n];
         Arrays.fill(colors, -1);
 
         
-        Map<Integer, List<Integer>> adj = getAdj(graph);
-        System.out.println(adj);
+        Map<Integer, int[]> adj = getAdj(graph);
+        //System.out.println(adj);
+        
+        for(int i = 0; i < n; i++){
+            if(colors[i] == -1)
+                if(isBipartiteBfs(adj, i, colors, 0) == false){
+                    return false;
+                }        
+        }
+        
+        return true;
+        
+    }
+    //BFS end
+    
+    //DFS start
+    public boolean isBipartite_dfs(int[][] graph) {
+        int n = graph.length;
+        
+        int[] colors = new int[n];
+        Arrays.fill(colors, -1);
+
+        
+        Map<Integer, int[]> adj = getAdj(graph);
+        //System.out.println(adj);
         
         boolean result = true;
         for(int i = 0; i < n; i++){
@@ -25,11 +72,11 @@ class Solution {
         return result;
     }
     
-    boolean dfs(Map<Integer, List<Integer>> adj, int currNode, int[] colors, int currColor ){
+    boolean dfs(Map<Integer, int[]> adj, int currNode, int[] colors, int currColor ){
         
         colors[currNode] = currColor;
         
-        List<Integer> neighbours = adj.get(currNode);
+        int[] neighbours = adj.get(currNode);
         
         for(int node: neighbours){
             if(colors[node] == colors[currNode]){
@@ -47,20 +94,17 @@ class Solution {
         }
         return true;
     }
+    //DFS end
     
-    Map<Integer, List<Integer>> getAdj(int[][] graph){
-        Map<Integer, List<Integer>> adj = new HashMap<>();
+    //Not needed rather can simply put array in map
+    
+    Map<Integer, int[]> getAdj(int[][] graph){
+        Map<Integer, int[]> adj = new HashMap<>();
         
         for(int i = 0; i<graph.length; i++){
             int[] nodes = graph[i];
-            if(nodes.length == 0){
-                adj.put(i, new ArrayList<>());
-            }
-            for(int j = 0; j < nodes.length; j++){
-                int node = nodes[j];
-                adj.computeIfAbsent(i, k->new ArrayList<>()).add(node);
-            }
-            
+            adj.put(i, nodes);
+
         }
         return adj;
     }
