@@ -1,7 +1,54 @@
 class Solution {
     
-    ///DSU Approach - Start
     public int findCircleNum(int[][] isConnected) {
+        Map<Integer, List<Integer>> adj = getAdj(isConnected);
+        int size = adj.size();
+        boolean[] visited = new boolean[size];
+
+        int number_of_province = 0;
+        for(int i = 0; i < size; i++){
+
+            if(!visited[i]){
+                number_of_province++;
+                dfs(i, adj, visited);
+            }
+        }
+        return number_of_province;
+    }
+
+    Map<Integer, List<Integer>> getAdj(int[][] connected){
+        Map<Integer, List<Integer>> map = new HashMap<>();
+
+        for(int i = 0; i < connected.length; i++){
+            int[] connections = connected[i];
+            map.putIfAbsent(i, new ArrayList<>());
+
+            for(int j = 0; j < connections.length; j++){
+                if(i != j && connections[j] == 1){
+                    map.get(i).add(j);
+                }
+            }
+        }
+
+        System.out.println(map);
+        return map;
+    }
+
+    public void dfs(int currentNode, Map<Integer, List<Integer>> adj, boolean[] visited){
+        visited[currentNode] = true;
+
+        List<Integer> neighbours = adj.get(currentNode);
+
+        for(int neighbour: neighbours){
+            if(!visited[neighbour]){
+                dfs(neighbour, adj, visited);
+            }
+        }
+    }
+
+
+    ///DSU Approach - Start
+    public int findCircleNum_DSU(int[][] isConnected) {
         int n = isConnected.length;
         UnionFind uf = new UnionFind(n);
         //int numberOfComponents = n;
