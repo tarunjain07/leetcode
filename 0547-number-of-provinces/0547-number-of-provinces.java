@@ -1,5 +1,6 @@
 class Solution {
     
+    //DFS Start
     public int findCircleNum(int[][] isConnected) {
         Map<Integer, List<Integer>> adj = getAdj(isConnected);
         int size = adj.size();
@@ -45,6 +46,7 @@ class Solution {
             }
         }
     }
+    //DFS End
 
 
     ///DSU Approach - Start
