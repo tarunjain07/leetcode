@@ -2,8 +2,7 @@ class Solution {
 
 
     /// DP - Bottom Up - Start
-    
-    public int longestArithSeqLength(int[] nums) {
+    public int longestArithSeqLength_bottom_up(int[] nums) {
        int n = nums.length;
 
        if(n <=2)
@@ -35,10 +34,62 @@ class Solution {
     }
 
     /// DP - Bottom Up - End
+    
+    //----------------------------------------------
+
+    //DP Memoization Start -  Array
+    private int getNumberOfSubsequence(int[] nums, int index, int diff, int[][] dp){
+
+        int ans = 0;
+
+        if(index >= nums.length)
+            return ans;
+        
+        if(dp[index][diff+501] != -1){
+            return dp[index][diff+501];
+        }
+
+
+        for(int j = index+1; j < nums.length; j++){
+            if(nums[j] - nums[index] == diff){
+                ans =  Math.max(ans, 1 + getNumberOfSubsequence(nums, j, diff, dp));
+            }
+        }
+
+
+        dp[index][diff+501] =  ans;
+        return ans;
+    }
+    
+    public int longestArithSeqLength(int[] nums) {
+        
+        if(nums.length <=2){
+            return nums.length;
+        }
+
+        int[][] dp = new int[1001][1003];
+        for(int[] temp: dp){
+            Arrays.fill(temp, -1);
+        }
+        
+        int pairs = 0;
+        for(int i = 0; i < nums.length; i++){
+            for(int j = i+1; j < nums.length; j++){
+                int diff = nums[j]-nums[i];
+                int length = 2 + getNumberOfSubsequence(nums, j, diff, dp);
+                pairs = Math.max(length, pairs);
+            }
+        }
+
+        return pairs;
+    }
+    
+    //DP Memoization End -  HashMap 
+    
 
     //----------------------------------------------
 
-    //DP Memoization Start
+    //DP Memoization Start -  HashMap
     private int getNumberOfSubsequence_memo(int[] nums, int index, int diff, Map<Integer, Integer>[] dp){
 
         int ans = 0;
@@ -64,6 +115,7 @@ class Solution {
         dp[index].put(diff, ans);
         return ans;
     }
+    
     public int longestArithSeqLength_memo(int[] nums) {
         
         if(nums.length <=2){
@@ -84,8 +136,8 @@ class Solution {
         return pairs;
     }
     
-    /// DP Memoization - End
- 
+    //DP Memoization End -  HashMap 
+    
     ///------------------------------------------------------
 
     /// RECURSION - START
