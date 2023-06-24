@@ -2,7 +2,7 @@ class Solution {
 
 
     /// DP - Bottom Up - Start
-    public int longestArithSeqLength_bottom_up(int[] nums) {
+    public int longestArithSeqLength(int[] nums) {
        int n = nums.length;
 
        if(n <=2)
@@ -38,7 +38,7 @@ class Solution {
     //----------------------------------------------
 
     //DP Memoization Start -  Array
-    private int getNumberOfSubsequence(int[] nums, int index, int diff, int[][] dp){
+    private int getNumberOfSubsequence_memo2(int[] nums, int index, int diff, int[][] dp){
 
         int ans = 0;
 
@@ -52,7 +52,7 @@ class Solution {
 
         for(int j = index+1; j < nums.length; j++){
             if(nums[j] - nums[index] == diff){
-                ans =  Math.max(ans, 1 + getNumberOfSubsequence(nums, j, diff, dp));
+                ans =  Math.max(ans, 1 + getNumberOfSubsequence_memo2(nums, j, diff, dp));
             }
         }
 
@@ -61,7 +61,7 @@ class Solution {
         return ans;
     }
     
-    public int longestArithSeqLength(int[] nums) {
+    public int longestArithSeqLength_memo2(int[] nums) {
         
         if(nums.length <=2){
             return nums.length;
@@ -76,7 +76,7 @@ class Solution {
         for(int i = 0; i < nums.length; i++){
             for(int j = i+1; j < nums.length; j++){
                 int diff = nums[j]-nums[i];
-                int length = 2 + getNumberOfSubsequence(nums, j, diff, dp);
+                int length = 2 + getNumberOfSubsequence_memo2(nums, j, diff, dp);
                 pairs = Math.max(length, pairs);
             }
         }
