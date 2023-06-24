@@ -9,25 +9,34 @@ class Solution {
         return n;
 
         int ans = 0;
-        Map<Integer, Integer>[] dp = new HashMap[n+1];
+        //Map<Integer, Integer>[] dp = new HashMap[n+1];
+        int[][] dp = new int[1001][1003];
 
+        for(int[] temp: dp){
+            Arrays.fill(temp, -1);
+        }
+        
         int maxValue = 0;
         for(int i = 1; i < n; i++){
             for(int j = 0; j <i; j++){
                 int cnt = 1;
                 int diff = nums[i]-nums[j];
 
-                if(dp[j] != null && dp[j].get(diff) != null){
-                    cnt = dp[j].get(diff);
+                //if(dp[j] != null && dp[j].get(diff) != null){
+                //    cnt = dp[j].get(diff);
+                //}
+                if(dp[j][diff+501] != -1){
+                    cnt = dp[j][diff+501];
                 }
 
-                if(dp[i] == null){
-                    dp[i] =  new HashMap<Integer, Integer>();
-                }
+                //if(dp[i] == null){
+                //    dp[i] =  new HashMap<Integer, Integer>();
+                //}
 
                 int newCount = cnt+1;
                 maxValue = Math.max(maxValue, newCount);
-                dp[i].put(diff, newCount);
+                //dp[i].put(diff, newCount);
+                dp[i][diff+501] = newCount;
             }
         }
         return maxValue;
