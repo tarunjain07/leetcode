@@ -20,23 +20,24 @@ class Solution {
         for(int i = 1; i < n; i++){
             for(int j = 0; j <i; j++){
                 int cnt = 1;
-                int diff = nums[i]-nums[j];
+                int diff = nums[i]-nums[j] + 500;
 
+                dp[i][diff] = dp[j][diff]>0 ? dp[j][diff]+1 : 2;
                 //if(dp[j] != null && dp[j].get(diff) != null){
                 //    cnt = dp[j].get(diff);
                 //}
-                if(dp[j][diff+501] != -1){
-                    cnt = dp[j][diff+501];
-                }
+                //if(dp[j][diff+501] != -1){
+                //    cnt = dp[j][diff+501];
+                //}
 
                 //if(dp[i] == null){
                 //    dp[i] =  new HashMap<Integer, Integer>();
                 //}
 
-                int newCount = cnt+1;
-                maxValue = Math.max(maxValue, newCount);
+                //int newCount = cnt+1;
+                maxValue = Math.max(maxValue, dp[i][diff]);
                 //dp[i].put(diff, newCount);
-                dp[i][diff+501] = newCount;
+                //dp[i][diff+501] = newCount;
             }
         }
         return maxValue;
