@@ -1,4 +1,4 @@
-1. Tried simple DFS with backtracking but getting TLE
+1. Tried simple DFS with backtracking but got TLE
 2. Then tried Binary Search + DFS with backtracking - again TLE
 3. Then removed backtrack logic and resolved TLE
 ​
