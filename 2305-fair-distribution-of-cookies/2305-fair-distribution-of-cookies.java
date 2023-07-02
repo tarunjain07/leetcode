@@ -13,7 +13,7 @@ class Solution {
 
         // if cookies left < children left then unfair distribution
         // so break
-        var cookiesLeft = cookies.length - idx;
+        var cookiesLeft = cookies.length - idx + 1;
         if (cookiesLeft < childrenLeft) {
             return Integer.MAX_VALUE;
         }
