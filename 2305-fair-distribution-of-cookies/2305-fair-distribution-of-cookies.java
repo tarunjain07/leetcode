@@ -1,31 +1,38 @@
 class Solution {
     int n;
-    int result = Integer.MAX_VALUE;
     
     public int distributeCookies(int[] cookies, int k) {
         
         n = cookies.length;
         int[] children = new int[k];
         
-        solve(0, cookies, children, k);
-        return result;
+        return solve(0, cookies, children, k, k);
     }
     
-    void solve(int idx, int[] cookies, int[] children, int k){
-        
-        if(idx>= n){
+    int solve(int idx, int[] cookies, int[] children, int k, int childrenLeft) {
+
+        // if cookies left < children left then unfair distribution
+        // so break
+        var cookiesLeft = cookies.length - idx + 1;
+        if (cookiesLeft < childrenLeft) {
+            return Integer.MAX_VALUE;
+        }
+
+        if (idx == cookies.length) {
             int unfairness = Arrays.stream(children).max().getAsInt();
-            result = Math.min(result, unfairness);
-            return;
+            return unfairness;
         }
+
         int cookie = cookies[idx];
-        for(int c = 0; c < k; c++){
+        int result = Integer.MAX_VALUE;
+        for (int c = 0; c < k; c++) {
+            childrenLeft -= children[c] == 0 ? 1 : 0;
             children[c] += cookie;
-            if(children[0] == 0){
-                break;
-            }
-            solve(idx+1, cookies, children, k);
+            result = Math.min(result, solve(idx + 1, cookies, children, k, childrenLeft));
             children[c] -= cookie;
+            childrenLeft += children[c] == 0 ? 1 : 0;
         }
+
+        return result;
     }
 }
