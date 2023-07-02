@@ -19,7 +19,7 @@ class Solution {
         }
 
         if (idx == cookies.length) {
-            int unfairness = Arrays.stream(children).max().getAsInt();
+            int unfairness = Math.max(Integer.MIN_VALUE, Arrays.stream(children).max().getAsInt());
             return unfairness;
         }
 
