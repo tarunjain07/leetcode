@@ -28,6 +28,9 @@ class Solution {
         for (int c = 0; c < k; c++) {
             childrenLeft -= children[c] == 0 ? 1 : 0;
             children[c] += cookie;
+            if(children[c] == 0){
+                break;
+            }
             result = Math.min(result, solve(idx + 1, cookies, children, k, childrenLeft));
             children[c] -= cookie;
             childrenLeft += children[c] == 0 ? 1 : 0;
