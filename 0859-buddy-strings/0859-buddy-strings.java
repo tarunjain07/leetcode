@@ -4,10 +4,16 @@ class Solution {
             return false;
         }
         
+        // -------------------- Equal Strings ---------------
+        //aa aa  - true;
+        //ab ab  - false;
+        //abcda abcda - true
+        //abcd abcd - false
         if(s.equals(goal)){
             return checkFreq(s);
         }
         
+        // -------------------- Unequal strings ---------------
         List<Integer> unequalIndicies = new ArrayList<>();
         for(int i = 0; i < s.length(); i++){
             if(s.charAt(i) != goal.charAt(i)){
