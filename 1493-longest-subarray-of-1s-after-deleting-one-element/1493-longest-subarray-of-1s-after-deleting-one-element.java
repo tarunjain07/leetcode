@@ -1,5 +1,7 @@
 class Solution {
     
+    //Sliding window - 
+    // O(N) approach 
     public int longestSubarray(int[] nums) {
         int lastZeroIndex = -1;
         int result = 0;
