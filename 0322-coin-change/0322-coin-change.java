@@ -1,5 +1,7 @@
 class Solution {
     
+    //bottom up / tabulation - 2d array
+    //TODO - is it possible with 1d array?
     public int coinChange(int[] coins, int amount) {
         int[][] dp = new int[coins.length+1][amount+1];
         for(int i = 0; i < amount+1; i++){
