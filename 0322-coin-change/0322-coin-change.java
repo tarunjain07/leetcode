@@ -1,8 +1,44 @@
 class Solution {
     
+    //aditya verma's approach
+    //\U0001f4a1 - Integer.MAX_VALUE-1 and not Integer.MAX_VALUE;
+    public int coinChange(int[] coins, int amount) {
+        int[][] dp = new int[coins.length+1][amount+1];
+        
+        for(int col = 0; col < amount+1; col++){
+            dp[0][col] = Integer.MAX_VALUE-1;
+        }
+        
+        for(int row = 1; row < coins.length+1; row++){
+            dp[row][0] = 0;
+        }
+        
+        for(int col = 1; col < amount+1; col++){
+            int val = coins[0];
+            if(col%val == 0)
+                dp[1][col] = col/val;
+            else
+                dp[1][col] = Integer.MAX_VALUE-1;
+        }
+        
+        
+        for(int row = 2; row < coins.length+1; row++){
+            for(int col = 1; col < amount+1; col++){
+                int val = coins[row-1];
+                if(val > col){
+                    dp[row][col] = dp[row-1][col];
+                }else{
+                    dp[row][col] = Math.min(dp[row-1][col], 1+dp[row][col-val]);
+                }
+            }
+        }
+        
+        return dp[coins.length][amount] == Integer.MAX_VALUE-1? -1: dp[coins.length][amount];
+    }
+    
     //bottom up / tabulation - 2d array
     //TODO - is it possible with 1d array?
-    public int coinChange(int[] coins, int amount) {
+    public int coinChange_bottomUp1(int[] coins, int amount) {
         int[][] dp = new int[coins.length+1][amount+1];
         for(int i = 0; i < amount+1; i++){
             dp[0][i] = Integer.MAX_VALUE;  
