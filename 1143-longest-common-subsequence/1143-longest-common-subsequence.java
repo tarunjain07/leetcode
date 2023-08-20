@@ -1,8 +1,34 @@
 class Solution {
     
+    //bottom up
+    public int longestCommonSubsequence(String text1, String text2) {
+        int len1 = text1.length();
+        int len2 = text2.length();
+        
+        int[][] dp = new int[len1+1][len2+1];
+        
+        for(int row = 0; row < len1+1; row++){
+            dp[row][0] = 0;
+        }
+        
+        for(int col = 0; col < len2+1; col++){
+            dp[0][col] = 0;
+        }
+        
+        for(int row = 1; row < len1+1; row++){
+            for(int col = 1; col < len2+1; col++){
+                if(text1.charAt(row-1) == text2.charAt(col-1))
+                    dp[row][col] =  1+dp[row-1][col-1];       
+                else
+                    dp[row][col] =  Math.max(dp[row-1][col], dp[row][col-1]); 
+            }
+        }
+        
+        return dp[len1][len2];
+    }
     
     //Memoization
-    public int longestCommonSubsequence(String text1, String text2) {
+    public int longestCommonSubsequence_memo(String text1, String text2) {
         int[][] dp = new int[text1.length()][text2.length()];
         for(int[] subDP: dp){
             Arrays.fill(subDP, -1); //check base condition --> base value is 0
