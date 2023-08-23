@@ -1,3 +1,4 @@
+//https://youtu.be/VDhRg-ZJTuc?si=2zAHPoaY3Idx8OdI
 class Solution {
     public String shortestCommonSupersequence(String str1, String str2) {
         if(str1.equals(str2)){
