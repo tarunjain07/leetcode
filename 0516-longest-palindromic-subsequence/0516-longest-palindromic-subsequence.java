@@ -1,5 +1,8 @@
 class Solution {
+    
+    
     public int longestPalindromeSubseq(String s) {
+        //longest palindromeSubSeq = LCS(a, reverse(a))
         String t = new StringBuilder(s).reverse().toString(); // This is the only difference than LCS
         
         int a = s.length();
