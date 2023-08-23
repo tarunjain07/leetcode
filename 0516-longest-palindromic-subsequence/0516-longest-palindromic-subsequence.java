@@ -1,6 +1,6 @@
 class Solution {
     public int longestPalindromeSubseq(String s) {
-        String t = new StringBuilder(s).reverse().toString();
+        String t = new StringBuilder(s).reverse().toString(); // This is the only difference than LCS
         
         int a = s.length();
         int b = t.length();
