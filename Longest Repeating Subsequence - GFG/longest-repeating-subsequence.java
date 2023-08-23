@@ -27,6 +27,7 @@ class GFG
 
 class Solution
 {
+    //https://youtu.be/hbTaCmQGqLg?si=WffFofVLm9K2S3x6
     public int LongestRepeatingSubsequence(String str1)
     {
         String str2 = str1;
