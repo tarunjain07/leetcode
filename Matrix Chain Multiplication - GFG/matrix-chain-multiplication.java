@@ -32,21 +32,21 @@ class Solution{
     static int matrixMultiplication(int N, int arr[])
     {
         //return matrixMultiplication_recursive(arr, 1, N-1);
-        Integer[][] memo = new Integer[N][N];
-        //for(int[] x: memo){
-        //    Arrays.fill(x, -1);
-        //}
+        int[][] memo = new int[N][N];
+        for(int[] x: memo){
+            Arrays.fill(x, -1);
+        }
         
         return matrixMultiplication_memo(arr, 1, N-1, memo);
         
     }
     
-    static int matrixMultiplication_memo(int[] arr,int i, int j, Integer[][] memo){
+    static int matrixMultiplication_memo(int[] arr,int i, int j, int[][] memo){
         if(i >= j){
             return 0;
         }
         
-        if(memo[i][j] != null){
+        if(memo[i][j] != -1){
             return memo[i][j];
         }
         
