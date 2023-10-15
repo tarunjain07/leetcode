@@ -26,7 +26,7 @@ class Solution {
 
     }
     public int numWays(int steps, int arrLen) {
-        int minSize = Math.min(arrLen, steps);
+        int minSize = Math.min(arrLen, (int)(Math.ceil(steps/2)+1));
         this.arrLen = minSize;
         this.t = new int [minSize][steps+1];
 
